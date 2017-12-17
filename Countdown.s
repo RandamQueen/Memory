@@ -4,8 +4,8 @@
 
 start
 	MOV R0, #1		; isValidWord = true
-	LDR	R1, =cdWord	; adrA = Load start address of word
-	LDR	R2, =cdLetters	; adrB =Load start address of letters
+	LDR R1, =cdWord		; adrA = Load start address of word
+	LDR R2, =cdLetters	; adrB =Load start address of letters
 	LDR R6, =0x23		; loading in '#' 
 	MOV R7, R1		; adrSize = adrA
 	LDR R8, =0		; countSize = 0;
@@ -26,7 +26,7 @@ notLetter
 
 endWhSize
 	CMP R8, #10		;	if( countSize >= 10) 
-	BLO	elemAWh		; 	{ 
+	BLO elemAWh		; 	{ 
 	MOV R0, #0		;	   isValidWord = false   
 	
 elemAWh				;	}
@@ -46,18 +46,18 @@ elemBWh
 	BNE notEqual		;		 {
 	STRB R6, [R5]		;	   		memory.Byte [tempAdr} = '#'
 	ADD R1, R1, #1		;			adrA++ 
-	B 	endElemBWh	;		 } 
+	B   endElemBWh		;		 } 
 	
 notEqual			;		 else {
 	ADD R5, R5, #1		;			tempAdr++
 	LDRB R4, [R5]		;	     	elementB = memory.Byte [tempAdr]
-	B 	elemBWh		; 		 }
+	B    elemBWh		; 		 }
 	
 endElemBWh	
 	CMP R4,#0		; 	  if (elementB == 0)  
 	BNE elemAWh		;	  { 
 	MOV R0, #0		;		isValidWord = false
-	B 	elemAWh		; 	  }
+	B   elemAWh		; 	  }
 endElemAWh			;	}	
 stop	B	stop
 
