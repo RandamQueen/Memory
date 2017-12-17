@@ -3,18 +3,18 @@
 	EXPORT	start
 
 start
-	MOV	R0, #0			; 	int cSize =0; 
-	LDR	R2, =ASize		;	aSize = address of aSize in memory;
-	LDR	R3, =BSize		;	bSize = address of bSize in memory;
+	MOV R0, #0			; 	int cSize =0; 
+	LDR R2, =ASize			;	aSize = address of aSize in memory;
+	LDR R3, =BSize			;	bSize = address of bSize in memory;
 	LDR R2, [R2]			; 	aSize = memory.Byte[aSize] 
 	LDR R3, [R3]			; 	bSize = memory.Byte[bSize] 
 	
-	LDR	R4, =AElems		;	aStartAddress= start of set A
-	LDR	R5, =BElems		;	bStartAddress= start of set B	
-	LDR	R6, =CElems		; 	cAddress = address of CElems in memory;
+	LDR R4, =AElems			;	aStartAddress= start of set A
+	LDR R5, =BElems			;	bStartAddress= start of set B	
+	LDR R6, =CElems			; 	cAddress = address of CElems in memory;
 
-	MOV	R7, R4			; 	tempAdrA =  aStartAdress; 
-	MOV	R9, #0			;	int countA = 0; 
+	MOV R7, R4			; 	tempAdrA =  aStartAdress; 
+	MOV R9, #0			;	int countA = 0; 
 	
 whLoopA	
 	CMP R9, R2			; 	while( countA != aSize) 
@@ -22,21 +22,21 @@ whLoopA
 	LDR R11, [R7]			;	elemA = memory.Byte[tempAdrA]; 
 	MOV R8, R5			;	tempAdrB =  bStartAdress;
 	MOV R10,#0			;	int countB = 0;
-	MOV	R1, #1			;	boolean notEqual = true; 
+	MOV R1, #1			;	boolean notEqual = true; 
 	
 whCompareB	
 	CMP R10, R3			;	while( countB != bSize
 	BEQ endWhCompareB		; 	&& 
-	CMP	R1, #0			;  	notEqual) 
-	BEQ	endWhCompareB		;	{ 	
+	CMP R1, #0			;  	notEqual) 
+	BEQ endWhCompareB		;	{ 	
 	LDR R12, [R8]			;	elemB = memory.Byte[tempAdrB]; 
 	CMP R11, R12			;  	if( elemA == elemB) 
-	BNE	notEqual		;	{ 
-	MOV	R1, #0			;	boolean notEqual = false; 
+	BNE notEqual			;	{ 
+	MOV R1, #0			;	boolean notEqual = false; 
 notEqual				;	}
-	ADD	R8, R8,#4		;	tempAdrB = tempAdrB  +4;; 
+	ADD R8, R8,#4			;	tempAdrB = tempAdrB  +4;; 
 	ADD R10, R10, #1		;	countB++; 
-	B whCompareB			;	}
+	B   whCompareB			;	}
 		
 	
 endWhCompareB				;	  
@@ -51,8 +51,8 @@ notUnique				;	}
 	B whLoopA			;	}
 endwhLoopA	
 
-	MOV	R8, R5			; 	tempAdrB =  bStartAdress; 
-	MOV	R10, #0			;	int countB = 0; 
+	MOV R8, R5			; 	tempAdrB =  bStartAdress; 
+	MOV R10, #0			;	int countB = 0; 
 	
 whLoopB
 	CMP R10, R3			; 	while( countB != bSize) 
@@ -60,22 +60,22 @@ whLoopB
 	LDR R12, [R8]			;	elemB = memory.Byte[tempAdrB]; 
 	MOV R7, R4			;	tempAdrA =  aStartAdress;
 	MOV R9,#0			;	int countA = 0;
-	MOV	R1, #1			;	boolean notEqual = true; 
+	MOV R1, #1			;	boolean notEqual = true; 
 	
 whCompareA				;
 	CMP R9, R2			;	while( countA != aSize
 	BEQ endWhCompareA		; 	&& 
-	CMP	R1, #1			;	notEqual) 
-	BNE	endWhCompareA		;	{ 	
+	CMP R1, #1			;	notEqual) 
+	BNE endWhCompareA		;	{ 	
 	LDR R11, [R7]			;	elemA = memory.Byte[tempAdrA]; 
 	CMP R11, R12			; 	if( elemA == elemB) 
-	BNE	notEqualB		;	{ 
-	MOV	R1, #0			;	boolean notEqual = false; 
+	BNE notEqualB			;	{ 
+	MOV R1, #0			;	boolean notEqual = false; 
 	
 notEqualB				;	}
-	ADD	R7, R7,#4		;	tempAdrA = tempAdrA  +4;; 
+	ADD R7, R7,#4			;	tempAdrA = tempAdrA  +4;; 
 	ADD R9, R9, #1			;	countA++; 
-	B 	whCompareA		;	}
+	B   whCompareA		;	}
 endWhCompareA				;	  
 	CMP R1, #1			; 	If ( notEqual )
 	BNE notUniqueB			;	{
