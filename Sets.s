@@ -1,7 +1,7 @@
 	AREA	Sets, CODE, READONLY
 	IMPORT	main
 	EXPORT	start
-
+	;This code belongs to Hannah Keating, JF TCD student
 start
 	MOV R0, #0			; 	int cSize =0; 
 	LDR R2, =ASize			;	aSize = address of aSize in memory;
@@ -38,7 +38,7 @@ notEqual				;	}
 	ADD R10, R10, #1		;	countB++; 
 	B   whCompareB			;	}
 		
-	
+	;This code belongs to Hannah Keating, JF TCD student
 endWhCompareB				;	  
 	CMP R1, #1			; 	If ( notEqual )
 	BNE notUnique			;	{
@@ -87,13 +87,13 @@ notUniqueB				;	}
 	ADD R10, R10, #1		;	countB++; 	
 	B whLoopB			;	}
 endwhLoopB
-
+	;This code belongs to Hannah Keating, JF TCD student
 	LDR R1, =CSize			;	cSizeAdr = adress of CSize in memory
 	STR R0, [R1]			;	Memory.Bye[cSizeAdr ] =cSize  ;
 
 stop	B	stop
 
-
+	;This code belongs to Hannah Keating, JF TCD student
 	AREA	TestData, DATA, READWRITE
 	
 ASize	DCD	5			;	Number of elements in A
