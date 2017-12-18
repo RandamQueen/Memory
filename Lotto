@@ -3,86 +3,87 @@
 	EXPORT	start
 
 start
-	LDR  R0, = COUNT	  ; adrCount = adress of COUNT in memory
+	LDR  R0, = COUNT	; adrCount = adress of COUNT in memory
 	LDR	 R1, = TICKETS	; adrTicket = adress of TICKET in memory
-	LDR  R2, = DRAW		  ; adrDRaw =  adress of DRAW in memory
+	LDR  R2, = DRAW		; adrDRaw =  adress of DRAW in memory
 	
-	MOV  R4, #0		  	  ; matchFour = 0
-	MOV  R5, #0	        ; matchFive = 0
-	MOV  R6, #0			    ; matchSix = 0
+	MOV  R4, #0			; matchFour = 0
+	MOV  R5, #0			; matchFive = 0
+	MOV  R6, #0			; matchSix = 0
 
-	MOV  R3, #0			    ; countTickNum = 0 
-	LDR  R0, [R0]		    ; countAmount = memory.Word[adrCount]; 
+	MOV  R3, #0			; countTickNum = 0 
+	LDR  R0, [R0]		; countAmount = memory.Word[adrCount]; 
 
 compareTickets 
-	CMP  R0,R3			    ; while( countTickNum != countAmount)   
+	CMP  R0,R3			; while( countTickNum != countAmount)   
 	BEQ  endComTickets	; { 
-	MOV  R7, #0			    ; elemtCount = 0
-	MOV  R11, #0		    ; matches = 0
+	MOV  R7, #0			; elemtCount = 0
+	MOV  R11, #0		; matches = 0
 	
 compareElm 
-	CMP  R7, #6			    ; while( elemtCount != 6) 
+	CMP  R7, #6			; while( elemtCount != 6) 
 	BEQ  endCompareElm 	; {	
-	LDRB R8, [R1]		    ; ticketElem = memory.Byte[adrTicket];
-	MOV  R9, #0		    	; drawCount = 0
-	MOV  R10, R2	    	; tempAdr = adrDraw
+	LDRB R8, [R1]		; ticketElem = memory.Byte[adrTicket];
+	MOV  R9, #0			; drawCount = 0
+	MOV  R10, R2		; tempAdr = adrDraw
 	
 compareDraw		
-	CMP  R9, #6			    ; while ( drawCount != 6) 
+	CMP  R9, #6			; while ( drawCount != 6) 
 	BEQ	 endCompareDraw	; { 
-	LDRB R12, [R10]		  ; drawElem = memory.Byte [tempAdr]
-	CMP  R12, R8		    ; if (drawElem == ticketElem) 
-	BNE  notEqual		    ; { 
-	ADD  R11, R11, #1	  ; matches++
-notEqual			      	; }
-	ADD R10, R10, #1	  ; tempAdr++ 
-	ADD R9, R9, #1		  ; drawCount++ 		
-	b 	 compareDraw	  ; }
+	LDRB R12, [R10]		; drawElem = memory.Byte [tempAdr]
+	CMP  R12, R8		; if (drawElem == ticketElem) 
+	BNE  notEqual		; { 
+	ADD  R11, R11, #1	; matches++
+notEqual				; }
+	ADD R10, R10, #1	; tempAdr++ 
+	ADD R9, R9, #1		; drawCount++ 		
+	b 	 compareDraw	; }
 endCompareDraw	
-	ADD  R1, R1, #1	  	; adrTicket++ 
-	ADD  R7, R7, #1		  ; elemtCount++
-	b    compareElm		  ; }
+	ADD  R1, R1, #1		; adrTicket++ 
+	ADD  R7, R7, #1		; elemtCount++
+	b    compareElm		; }
 	
 endCompareElm	
 
-	CMP R11, #6 		    ; if( matches == 6) 
-	BNE notSix			    ; { 
-	ADD R6, R6, #1		  ; matchSix++
-notSix					      ; } 
+	CMP R11, #6 		; if( matches == 6) 
+	BNE notSix			; { 
+	ADD R6, R6, #1		; matchSix++
+notSix					; } 
 
-	CMP R11, #5 		    ; if( matches == 65 
-	BNE notFive			    ; { 
-	ADD R5, R5, #1	  	; matchSix++
-notFive				      	; } 
+	CMP R11, #5 		; if( matches == 65 
+	BNE notFive			; { 
+	ADD R5, R5, #1		; matchSix++
+notFive					; } 
 
-	CMP R11, #4 	    	; if( matches == 4) 
-	BNE notFour			    ; { 
-	ADD R4, R4, #1		  ; matchSix++
-notFour				      	; } 
+	CMP R11, #4 		; if( matches == 4) 
+	BNE notFour			; { 
+	ADD R4, R4, #1		; matchSix++
+notFour					; } 
 
-	ADD  R3,R3,#1		    ; countTickNum++	
+	ADD  R3,R3,#1		; countTickNum++	
 	b	 compareTickets
-endComTickets			    ; }  
+endComTickets			; }  
 
-	LDR R7, = MATCH4	  ; adr4 = adress of MATCH4 in memory
-	LDR R8, = MATCH5	  ; adr5 = adress of MATCH5 in memory
-	LDR R9, = MATCH6	  ; adr6 = adress of MATCH6 in memory
+	LDR R7, = MATCH4	; adr4 = adress of MATCH4 in memory
+	LDR R8, = MATCH5	; adr5 = adress of MATCH5 in memory
+	LDR R9, = MATCH6	; adr6 = adress of MATCH6 in memory
 
-  STR R4, [R7]	      ; memory.Word[adr4] = matchFour
-	STR R5, [R8]		    ; memory.Word[adr5] = matchFive
-	STR R6, [R9]		    ; memory.Word[adr6] = matchSix
+	STR R4, [R7]		; memory.Word[adr4] = matchFour
+	STR R5, [R8]		; memory.Word[adr5] = matchFive
+	STR R6, [R9]		; memory.Word[adr6] = matchSix
 
 stop	B	stop 
 
 	AREA	TestData, DATA, READWRITE
 	
-COUNT	DCD	3					 	; Number of Tickets
-TICKETS	DCB	3, 8, 11, 21, 22, 31	; Tickets
+COUNT	DCD	4					 	; Number of Tickets
+TICKETS	DCB	9, 8, 11, 21, 22, 31	; Tickets
 	DCB	7, 23, 25, 28, 29, 32
 	DCB	10, 11, 12, 22, 26, 30
+	DCB	17, 18, 19, 22, 24, 32
 	
 
-DRAW	DCB	10, 11, 12, 22, 26, 30	; Lottery Draw
+DRAW	DCB	1, 2, 3, 4, 5, 6	; Lottery Draw
 
 MATCH4	DCD	0
 MATCH5	DCD	0
