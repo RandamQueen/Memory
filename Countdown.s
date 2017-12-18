@@ -1,7 +1,7 @@
 	AREA	Countdown, CODE, READONLY
 	IMPORT	main
 	EXPORT	start
-
+	;This code belongs to Hannah Keating, JF TCD student
 start
 	MOV R0, #1		; isValidWord = true
 	LDR R1, =cdWord		; adrA = Load start address of word
@@ -30,7 +30,7 @@ endWhSize
 	MOV R0, #0		;	   isValidWord = false   
 	
 elemAWh				;	}
-
+	;This code belongs to Hannah Keating, JF TCD student
 	LDRB R3, [R1]		;  elementA = memory.Byte [adrA]
 	CMP R0, #0		;	while (isValidWord 
 	BEQ endElemAWh		;	&&
@@ -61,7 +61,7 @@ endElemBWh
 endElemAWh			;	}	
 stop	B	stop
 
-
+	;This code belongs to Hannah Keating, JF TCD student
 
 	AREA	TestData, DATA, READWRITE
 	
