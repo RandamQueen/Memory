@@ -97,7 +97,7 @@ stop	B	stop
 	AREA	TestData, DATA, READWRITE
 	
 ASize	DCD	5			;	Number of elements in A
-AElems	DCD	45,75,90,700,6
+AElems	DCD	45,75,90,700,6		; 	Elements of B
 BSize	DCD	5			; 	Number of elements in B
 BElems	DCD 700,75,100,3,78		; 	Elements of B
 
