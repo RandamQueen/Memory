@@ -75,7 +75,7 @@ whCompareA				;
 notEqualB				;	}
 	ADD R7, R7,#4			;	tempAdrA = tempAdrA  +4;; 
 	ADD R9, R9, #1			;	countA++; 
-	B   whCompareA		;	}
+	B   whCompareA			;	}
 endWhCompareA				;	  
 	CMP R1, #1			; 	If ( notEqual )
 	BNE notUniqueB			;	{
