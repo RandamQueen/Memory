@@ -46,19 +46,21 @@ endCompareDraw
 endCompareElm	
 
 	CMP R11, #6 		; if( matches == 6) 
-	BNE notSix			; { 
+	BNE notSix		; { 
 	ADD R6, R6, #1		; matchSix++
-notSix					; } 
+	B   endMatch		; 
+notSix				; } 
 
 	CMP R11, #5 		; if( matches == 65 
-	BNE notFive			; { 
+	BNE notFive		; { 
 	ADD R5, R5, #1		; matchSix++
-notFive					; } 
+	B 	endMatch	;
+notFive				; } 
 
 	CMP R11, #4 		; if( matches == 4) 
-	BNE notFour			; { 
+	BNE endMatch		; { 
 	ADD R4, R4, #1		; matchSix++
-notFour					; } 
+endMatch			; } 
 
 	ADD  R3,R3,#1		; countTickNum++	
 	b	 compareTickets
