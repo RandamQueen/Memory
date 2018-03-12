@@ -3,4 +3,4 @@ The code for the second Assignment for CS1021- Memory
 
 The code for this Assingment was devided up into three sessions: Sets-Symmetric Difference, Countdown Checkers and Lottery. 
 
-As of last commit, this assingment hasn't been completed nor graded. 
+In the end, this assingment received a 99% grade. 
